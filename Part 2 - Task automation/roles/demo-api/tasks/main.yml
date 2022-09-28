@@ -1,0 +1,11 @@
+---
+
+# main.yml
+#
+# This file executes a call to *demo-api.yaml* file and gives it 
+# sudo privileges to run the task as an power user.
+# The become: true command gives it root privileges.
+#
+
+- import_tasks: demo-api.yaml
+  become: true

@@ -1,0 +1,40 @@
+---
+
+# install_packages.yaml
+#
+# This file install all required packages for running the project. It will install:
+#
+# - EPEL-repository - to install nodejs from
+# - Node.js
+# - NPM
+# - GIT
+# - pm2 - to run apps in background
+   
+## Before we procced we will run a yum update to make sure we have latest packages
+- name: Updating packages
+  yum:
+    name: '*'
+    state: latest
+    update_cache: yes
+    update_only: yes
+  
+## We need to install EPEL repo in order to install Nodejs from it
+- name: Enabling EPEL repository, installing Node.js, NPM and Git
+  yum:
+    name:  "{{ packages }}"
+  vars:
+    packages:
+      - epel-release
+      - nodejs
+      - npm
+      - git
+    state: latest
+ 
+  ## In order to make the project works we need to run two demo apps simultaneously, 
+  ## this is possibly with "pm2 package manager" that can be used to run multiple apps 
+  ## at the background.
+  ## https://pm2.keymetrics.io/docs/usage/quick-start/ - for more information 
+- name: Installing pm2 package globally
+  npm:
+    name: pm2
+    global: true

@@ -1,0 +1,37 @@
+---
+
+# demo-api.yaml
+#
+# This file handles the process of:
+#
+# - Cloning demo-api from github
+# - Configure .env file
+# - Install dependencies
+# - Startin the demo-api app
+#
+
+## - Cloning demo-api
+- name: Cloning Demo-API
+  git:
+    repo: 'https://github.com/gbh-tech/demo-api'
+    dest: /home/cmarte/devops-challenge/demo-api
+    update: yes
+    force: yes
+  
+## - Configuring .env file
+- name: Configuring .env file in demo-api directory
+  shell: "cp .env.example .env"
+  args:
+    chdir: "/home/cmarte/devops-challenge/demo-api/"
+
+## - Installing dependencies for demo-api
+- name: installing dependecies for demo-api
+  shell: npm install
+  args:
+    chdir: "/home/cmarte/devops-challenge/demo-api/"
+
+## - Starting demo-api app    
+- name: Starting demo-api app
+  shell: pm2 reload --name demo-api -p 3001 app.js
+  args:
+    chdir: "/home/cmarte/devops-challenge/demo-api/"

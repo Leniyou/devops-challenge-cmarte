@@ -1,0 +1,11 @@
+---
+
+# main.yml
+#
+# This file excecutes a call to *demo-webapp.yaml* file and 
+# gives it root privileges to run the task as a power user.
+# The become: true command gives it root privileges.
+#
+
+- import_tasks: demo-webapp.yaml
+  become: true

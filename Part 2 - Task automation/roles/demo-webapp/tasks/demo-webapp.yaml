@@ -1,0 +1,37 @@
+---
+
+# demo-webapp.yaml
+#
+# This file handles the process of:
+#
+# - Cloning demo-web from github
+# - Configure .env file
+# - Install dependencies and build demo-webapp
+# - Startin the demo-webapp app
+#
+ 
+## - Cloning demo-webapp
+- name: Cloning Demo-webapp
+  git:
+    repo: 'https://github.com/gbh-tech/demo-webapp'
+    dest: /home/cmarte/devops-challenge/demo-webapp
+    update: yes
+    force: yes
+  
+## - Configuring .env file
+- name: Configuring .env file in demo-webapp directory
+  shell: "cp .env.example .env"
+  args:
+    chdir: "/home/cmarte/devops-challenge/demo-webapp"
+
+## - Installing dependecies and building demo-webapp
+- name: Installing dependecies and building the webapp
+  shell: npm install && npm run build
+  args:
+    chdir: "/home/cmarte/devops-challenge/demo-webapp"
+
+## - Starting demo-webapp app
+- name: Starting demo-webapp
+  shell: pm2 reload --name demo-webapp -p 3000 ./src/App.js
+  args:
+    chdir: "/home/cmarte/devops-challenge/demo-webapp"

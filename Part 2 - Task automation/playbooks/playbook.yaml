@@ -1,0 +1,20 @@
+---
+
+# DevOps Challenge - Junior Level
+# Create an Ansible playbook that executes the same activities as in your 
+# application configuration scripts. In other words, create a playbook to 
+# deploy the applications you configured in your Part 1!
+#
+# This is a playbook that automates the deployment of a sample node.js demo application:
+#
+# This script will run the "tasks" described on every roles directory. 
+# It will call the main.yaml file on every roles directory. Like this:
+# roles > install_packages > tasks > main.yml
+# roles > demo-api > tasks > main.yml
+# roles > demo-webapp > tasks > main.yml
+
+- hosts: devopschanllenge
+  roles:
+    - install_packages
+    - demo-api
+    - demo-webapp
